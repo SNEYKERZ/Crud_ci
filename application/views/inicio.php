@@ -7,7 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	</head>
 	<body>
-		<div class="container">
+	<div class="container">
 			<!-- Título de oa página -->
 			<div class="row">
 				<h2>CRUD EN CI 3</h2>
