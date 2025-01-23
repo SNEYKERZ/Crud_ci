@@ -30,3 +30,10 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+# Ignorar archivos y directorios de CodeIgniter
+application/cache/*
+application/logs/*
+system/*
+.env
+vendor/
