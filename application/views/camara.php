@@ -6,7 +6,7 @@
     <title>Acceso a Cámara en Vivo</title>
     <style>
         video {
-            width: 100%;
+            width: 50%;
             height: auto;
             border: 2px solid #333;
         }
