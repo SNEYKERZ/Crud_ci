@@ -15,7 +15,7 @@
 
 			<!-- Formulario -->
 			<div class="mb-12">
-				<?php echo form_open('agregar', ['id' => 'form-persona']); ?>
+				<?php echo form_open('inicio/agregar', ['id' => 'form-persona']); ?>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<label for="">Nombre</label>
@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-group col-sm-6">
 							<label for="">Apellidos</label>
-							<input type="text" name="apellido" class="form-control" required placeholder="Apellidos" id="ap">
+							<input type="text" name="apellidos" class="form-control" required placeholder="Apellidos" id="apellidos">
 						</div>
 					</div>
 					<div class="row">
@@ -75,7 +75,7 @@
                                         <td>'.$persona->fecha_nacimiento.'</td>
                                         <td>'.$persona->genero.'</td>
                                         <td><button type="button" class="btn btn-warning text-white" onclick="llenar_datos('.$persona->id.', `'.$persona->nombre.'`, `'.$persona->apellidos.'`, `'.$persona->fecha_nacimiento.'`, `'.$persona->genero.'`)">Editar</button></td>
-                                        <td><a href="'.base_url('eliminar/'.$persona->id).'" type="button" class="btn btn-danger">Eliminar</a></td>
+                                        <td><a href="'.base_url('inicio/eliminar/'.$persona->id).'" type="button" class="btn btn-danger">Eliminar</a></td>
                                     </tr>';
                                 }
 								?>
@@ -87,8 +87,8 @@
 		</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		<script>
-			let url = "<?php echo base_url('actualizar'); ?>";
-			const llenar_datos = (id, nombre, apelido,fecha_nacimiento, genero) => {
+			let url = "<?php echo base_url('inicio/actualizar'); ?>";
+			const llenar_datos = (id, nombre, apellidos,fecha_nacimiento, genero) => {
 				let path = url+"/"+id;
 				document.getElementById('form-persona').setAttribute('action', path);
 				document.getElementById('nombre').value = nombre;
