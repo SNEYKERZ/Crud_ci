@@ -22,7 +22,10 @@ class Inicio extends CI_Controller {
 		/* $this->load->view('camara');  */
 
 	}
-	
+
+    public function get_by_email($email){
+
+	}
 
 	public function agregar(){
 		$data = array(
@@ -34,6 +37,11 @@ class Inicio extends CI_Controller {
  		$this->Persona->agregar($data);
 		redirect('inicio');
  	}
+
+	public function get_by_id($id){
+		$data = $this->Persona->get_persona_by_id($id);
+		echo json_encode($data);
+	}
 
 	public function editar($id){
 		$data = $this->Persona->get_persona_by_id($id);

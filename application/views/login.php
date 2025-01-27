@@ -5,67 +5,68 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>Login</title>
-	<!-- Custom Bootstrap -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Login/Registro</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-	<div class="container d-flex justify-content-center align-items-center h-100">
-		<a id="login" href=" <?= base_url('login'); ?> " class="mt-3 me-2" style="text-decoration: none; font-size: 30px">
-			<p>Login</p>
-		</a>
-		||
-		<a id= "registro" class="mt-3 ms-2" style="text-decoration: none; font-size: 30px">
-			<p>Registro</p>
-		</a>
-	</div>
-	
-	<div class="form-fluid">
-		<div class="d-flex justify-content-center">
-			<div class="card p-4 w-75">
-				<h3 class="text-center mt-3 mb-4">LOGIN</h3>
-				<form>
-				<div class="mb-3" id="name" style="display: none;">
-						<label for="name" class="form-label">nombre</label>
-						<input type="text" class="form-control" id ="name" placeholder="nombre" required>						
-					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">Email</label>
-						<input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
-						<div id="emailHelp" class="form-text">lo compartiremos con el que lo pida mi fai😜.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="contraseña" class="form-label">Password</label>
-						<input type="password" class="form-control" id="contraseña" required>
-					</div>
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">Check me out</label>
-					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
-			</div>
-		</div>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <!-- Títulos para alternar entre Login y Registro -->
+        <div class="mb-4 text-center">
+            <a id="login-tab" href="#" class="me-3 text-decoration-none" style="font-size: 30px;">Login</a>
+            ||
+            <a id="registro-tab" href="#" class="ms-3 text-decoration-none" style="font-size: 30px;">Registro</a>
+        </div>
 
-	</div>
-<script>
-	document.getElementById('registro').addEventListener('click', function(){
-		document.getElementById('name').style.display = 'block';
+        <!-- Formulario -->
+        <div class="card p-4 w-50">
+            <h3 id="form-title" class="text-center mb-4">LOGIN</h3>
+            <form method="post" action="<?= base_url('login/login'); ?>">
+                <input type="hidden" id="action_type" name="action_type" value="login"> <!-- Campo oculto para alternar -->
+                
+                <!-- Campo para el nombre (solo visible en registro) -->
+                <div class="mb-3" id="nombre-container" style="display: none;">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Tu nombre">
+                </div>
 
-		if (document.getElementById('name').style.display == 'block') {
-			document.getElementById('name').style.display = 'none';
-		}
-	
-	});
-	document.getElementById('login').addEventListener('click', function(){
-		document.getElementById('name').style.display = 'none';
-	
-	});
+                <!-- Campo para el email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Tu correo" required>
+                    <div class="form-text">No compartiremos tu correo con nadie.</div>
+                </div>
 
-</script>
+                <!-- Campo para la contraseña -->
+                <div class="mb-3">
+                    <label for="contraseña" class="form-label">Contraseña</label>
+                    <input type="password" name="password" id="contraseña" class="form-control" placeholder="Tu contraseña" required>
+                </div>
+
+                <!-- Botón dinámico -->
+                <button type="submit" id="submit-button" class="btn btn-primary w-100">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Alternar entre Login y Registro
+        document.getElementById('login-tab').addEventListener('click', function () {
+            document.getElementById('nombre-container').style.display = 'none'; // Oculta campo nombre
+            document.getElementById('form-title').textContent = 'LOGIN'; // Cambia título
+            document.getElementById('submit-button').textContent = 'Entrar'; // Cambia botón
+            document.getElementById('action_type').value = 'login'; // Define acción como login
+        });
+
+        document.getElementById('registro-tab').addEventListener('click', function () {
+            document.getElementById('nombre-container').style.display = 'block'; // Muestra campo nombre
+            document.getElementById('form-title').textContent = 'REGISTRO'; // Cambia título
+            document.getElementById('submit-button').textContent = 'Registrarse'; // Cambia botón
+            document.getElementById('action_type').value = 'registro'; // Define acción como registro
+        });
+    </script>
 </body>
 
 </html>

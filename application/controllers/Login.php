@@ -3,48 +3,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	public function __construct() {
-		parent::__construct();
-		$this->load->database();
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->model('Persona');	
-		
-	}
-	public function index()
-	{
-		$this->load->view('login');
-	}
-	public function login(){
+    public function __construct() {
+        parent::__construct();
+        $this->load->database();
+        $this->load->helper(['url', 'form']);
+        $this->load->library(array('form_validation','session'));
+        $this->load->model('Persona');
+    }
 
-		//logica inicio de secion, si contiene mas que solo el email y la contraseña, debe hacer un  registro  a la db si solo trae el email y la contraseña, debe hacer un login
-		
-		//si se envia el formulario
-		if($this->input->post()){
+    public function index() {
+        $this->load->view('login');
+    }
 
-			$this->input->post('email');
-			$this->input->post('contraseña');
-			$this->input->post('name');
+    public function login() {
+        if ($this->input->post()) {
+            $email = trim($this->input->post('email'));
+            $password = trim($this->input->post('password'));
+            $name = trim($this->input->post('name'));
 
-			if(empty($name)){
-		        // Validar que los campos no estén vacíos
-				if (empty($email) || empty($password)) {
-				$this->session->set_flashdata('error', 'El email y la contraseña son obligatorios.');
-				redirect('login');  // Redirige a la misma página si falta algún campo
-				}else{
-					
-				}
+            // Validación de datos
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 
-			}
-			
+            if ($this->form_validation->run() === FALSE) {
+                $this->load->view('login');
+                return;
+            }
 
-		}
-
-		$data['personas'] = $this->Persona->get_all_personas();
-		
-		
-		
-		redirect($this->load->view('inicio', $data));
-	
-	}
+            if (!empty($name)) {
+                // Registro
+                $persona = [
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => password_hash($password, PASSWORD_BCRYPT),
+                ];
+                $this->Persona->agregar($persona);
+                $this->session->set_flashdata('success', 'Registro exitoso');
+                redirect('inicio');
+            } else {
+                // Login
+                $persona = $this->Persona->get_by_email($email);
+                if ($persona && password_verify($password, $persona['password'])) {
+                    $this->session->set_userdata('user', $persona);
+                    redirect('inicio');
+                } else {
+                    $this->session->set_flashdata('error', 'Email o contraseña incorrectos');
+                    redirect('login');
+                }
+            }
+        }
+    }
 }
