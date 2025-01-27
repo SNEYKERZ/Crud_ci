@@ -19,11 +19,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
             ||
             <a id="registro-tab" href="#" class="ms-3 text-decoration-none" style="font-size: 30px;">Registro</a>
         </div>
+			<?php if ($this->session->flashdata('success')): ?>
+			<div class="alert alert-success" role="alert">
+				<?= $this->session->flashdata('success'); ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if ($this->session->flashdata('error')): ?>
+			<div class="alert alert-danger" role="alert">
+				<?= $this->session->flashdata('error'); ?>
+			</div>
+		<?php endif; ?>
 
         <!-- Formulario -->
         <div class="card p-4 w-50">
             <h3 id="form-title" class="text-center mb-4">LOGIN</h3>
             <form method="post" action="<?= base_url('login/login'); ?>">
+
+			<input type="hidden" name="action" id="action" value="login">
+			
                 <input type="hidden" id="action_type" name="action_type" value="login"> <!-- Campo oculto para alternar -->
                 
                 <!-- Campo para el nombre (solo visible en registro) -->
@@ -54,6 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script>
         // Alternar entre Login y Registro
         document.getElementById('login-tab').addEventListener('click', function () {
+			document.getElementById('action').value = 'login'; // Define acción como login
             document.getElementById('nombre-container').style.display = 'none'; // Oculta campo nombre
             document.getElementById('form-title').textContent = 'LOGIN'; // Cambia título
             document.getElementById('submit-button').textContent = 'Entrar'; // Cambia botón
@@ -61,7 +76,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         document.getElementById('registro-tab').addEventListener('click', function () {
+			document.getElementById('action').value = 'registro'; // Define acción como registro 
             document.getElementById('nombre-container').style.display = 'block'; // Muestra campo nombre
+			document.getElementById('nombre-container').setAttribute = require; 
             document.getElementById('form-title').textContent = 'REGISTRO'; // Cambia título
             document.getElementById('submit-button').textContent = 'Registrarse'; // Cambia botón
             document.getElementById('action_type').value = 'registro'; // Define acción como registro

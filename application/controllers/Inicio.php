@@ -14,7 +14,7 @@ class Inicio extends CI_Controller {
 	public function index()
 	{
 		// Obtener personas desde el modelo
-		$data['personas'] = $this->Persona->get_all_personas();
+		$data['personas'] = $this->Persona->get_all();
 		
 		// Cargar la vista y pasar los datos
 		$this->load->view('inicio', $data);
@@ -23,14 +23,12 @@ class Inicio extends CI_Controller {
 
 	}
 
-    public function get_by_email($email){
-
-	}
-
 	public function agregar(){
 		$data = array(
 			'nombre' => $this->input->post('nombre'),
 			'apellidos' => $this->input->post('apellido'),
+			'email'=> $this->input->post('email'),
+			'password'=> $this->input->post('password'),
 			'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
 			'genero' => $this->input->post('genero')
 		);
