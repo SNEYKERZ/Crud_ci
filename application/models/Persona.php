@@ -11,9 +11,9 @@ class Persona extends CI_Model {
 
     // Insertar un nuevo registro
     public function insert($data) {
-        if (isset($data['password'])) {
+/*         if (isset($data['password'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT); // Cifrado de contraseña
-        }
+        } */
 
         if ($this->db->insert('personas', $data)) {
             return $this->db->insert_id(); // Retornar el ID del nuevo registro
@@ -29,9 +29,9 @@ class Persona extends CI_Model {
 
     // Actualizar un registro
     public function update($id, $data) {
-        if (isset($data['password'])) {
+       /*  if (isset($data['password'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT); // Cifrado de contraseña
-        }
+        } */
 
         $this->db->where('id', $id);
         return $this->db->update('personas', $data);

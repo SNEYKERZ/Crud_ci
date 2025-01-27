@@ -15,7 +15,7 @@
 
 			<!-- Formulario -->
 			<div class="mb-12">
-				<?php echo form_open('inicio/agregar', ['id' => 'form-persona']); ?>
+				<?php echo form_open('inicio/insert', ['id' => 'form-persona']); ?>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<label for="">Nombre</label>
@@ -70,12 +70,12 @@
                                 $count = 0;
                                 foreach($personas as $persona){
                                     echo '<tr>
-                                        <td>'.$count++.'</td>
+                                        <td>'.++$count.'</td>
                                         <td>'.$persona->nombre.' '.$persona->apellidos.'</td>
                                         <td>'.$persona->fecha_nacimiento.'</td>
                                         <td>'.$persona->genero.'</td>
                                         <td><button type="button" class="btn btn-warning text-white" onclick="llenar_datos('.$persona->id.', `'.$persona->nombre.'`, `'.$persona->apellidos.'`, `'.$persona->fecha_nacimiento.'`, `'.$persona->genero.'`)">Editar</button></td>
-                                        <td><a href="'.base_url('inicio/eliminar/'.$persona->id).'" type="button" class="btn btn-danger">Eliminar</a></td>
+                                        <td><a href="'.base_url('inicio/delete/'.$persona->id).'" type="button" class="btn btn-danger">Eliminar</a></td>
                                     </tr>';
                                 }
 								?>
@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<script>
-			let url = "<?php echo base_url('inicio/actualizar'); ?>";
+			let url = "<?php echo base_url('inicio/update'); ?>";
 			const llenar_datos = (id, nombre, apellidos,fecha_nacimiento, genero) => {
 				let path = url+"/"+id;
 				document.getElementById('form-persona').setAttribute('action', path);

@@ -56,7 +56,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!-- Campo para la contraseña -->
                 <div class="mb-3">
                     <label for="contraseña" class="form-label">Contraseña</label>
-                    <input type="password" name="password" id="contraseña" class="form-control" placeholder="Tu contraseña" required>
+                    <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Tu contraseña" required>
                 </div>
 
                 <!-- Botón dinámico -->

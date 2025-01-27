@@ -20,12 +20,12 @@ class Login extends CI_Controller {
         if ($this->input->post()) {
 			$action = $this->input->post('action'); // Determina si es login o registro
             $email = trim($this->input->post('email'));
-            $password = trim($this->input->post('password'));
+            $password = trim($this->input->post('contraseña'));
             $name = trim($this->input->post('nombre')); // Solo estará presente si es registro
 
             // Validar email y contraseña para ambos casos
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('contraseña', 'Contraseña', 'required|min_length[6]');
 
 			if($action ==='login') {
 

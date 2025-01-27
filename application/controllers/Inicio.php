@@ -23,16 +23,16 @@ class Inicio extends CI_Controller {
 
 	}
 
-	public function agregar(){
+	public function insert(){
 		$data = array(
 			'nombre' => $this->input->post('nombre'),
-			'apellidos' => $this->input->post('apellido'),
-			'email'=> $this->input->post('email'),
-			'password'=> $this->input->post('password'),
-			'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
+			'apellidos' => $this->input->post('apellidos'),
+/* 			'email'=> $this->input->post('email'),*/
+/* 			'contraseña'=> $this->input->post('contraseña'),
+ */			'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
 			'genero' => $this->input->post('genero')
 		);
- 		$this->Persona->agregar($data);
+ 		$this->Persona->insert($data);
 		redirect('inicio');
  	}
 
@@ -45,20 +45,19 @@ class Inicio extends CI_Controller {
 		$data = $this->Persona->get_persona_by_id($id);
 		echo json_encode($data);
 	}
-	public function actualizar(){
-		$id = $this->input->post('id');
+	public function update($id){
 		$data = array(
 			'nombre' => $this->input->post('nombre'),
-			'apellidos' => $this->input->post('apellido'),
+			'apellidos' => $this->input->post('apellidos'),
 			'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
 			'genero' => $this->input->post('genero')
 		);
-		$this->Persona->actualizar($id, $data);
+		$this->Persona->update($id, $data);
 		redirect('inicio');
 	}
 
-	public function eliminar($id){
-		$this->Persona->eliminar($id);
+	public function delete($id){
+		$this->Persona->delete($id);
 		redirect('inicio');
 	}
 }
